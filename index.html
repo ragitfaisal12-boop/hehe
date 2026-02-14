@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>For Danis 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    padding:0;
+    height:100vh;
+    overflow:hidden;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Poppins',sans-serif;
+    color:white;
+}
+
+/* CINEMATIC LIGHT BLOOM */
+.light{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle,#ff99cc 0%,#ff66b2 30%,#1a0010 80%);
+    opacity:0;
+    animation:lightFade 4s forwards;
+}
+
+@keyframes lightFade{
+    to{opacity:1;}
+}
+
+.container{
+    text-align:center;
+    max-width:800px;
+    z-index:2;
+    transform:scale(0.9);
+    animation:zoomIn 6s ease forwards;
+}
+
+@keyframes zoomIn{
+    to{transform:scale(1);}
+}
+
+h1{
+    font-family:'Playfair Display',serif;
+    font-size:65px;
+    margin-bottom:20px;
+    opacity:0;
+    animation:fadeUp 3s 2s forwards;
+}
+
+p{
+    font-size:20px;
+    line-height:1.8;
+    opacity:0;
+}
+
+@keyframes fadeUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* FLOWERS */
+.flower{
+    position:absolute;
+    bottom:-150px;
+    animation:rise 18s linear infinite;
+}
+
+.petal{
+    width:28px;
+    height:45px;
+    border-radius:50%;
+    position:absolute;
+    left:50%;
+    transform-origin:bottom center;
+}
+
+.stem{
+    width:4px;
+    height:70px;
+    background:#2e8b57;
+    position:absolute;
+    top:45px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+@keyframes rise{
+    0%{transform:translateY(0) rotate(0deg) scale(0.7); opacity:0;}
+    20%{opacity:1;}
+    100%{transform:translateY(-130vh) rotate(360deg) scale(1); opacity:0;}
+}
+
+button{
+    margin-top:40px;
+    padding:12px 30px;
+    border-radius:30px;
+    border:none;
+    background:linear-gradient(45deg,#ff66a3,#ff3385);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    opacity:0;
+    animation:fadeUp 3s 5s forwards;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="light"></div>
+
+<div class="container">
+    <h1>Happy Valentine’s Day 💗</h1>
+    <p id="typingText"></p>
+    <button onclick="showFinal()">pencet yahh ✨</button>
+</div>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8a3d9d0e7.mp3?filename=romantic-background-112191.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* TYPEWRITER EFFECT */
+const text = "keep me as your finish line.";
+let index = 0;
+function typeEffect(){
+    if(index < text.length){
+        document.getElementById("typingText").style.opacity=1;
+        document.getElementById("typingText").innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeEffect,50);
+    }
+}
+setTimeout(typeEffect,4000);
+
+/* FINAL PAGE */
+function showFinal(){
+    document.querySelector(".container").innerHTML = `
+        <h1 style="animation:fadeUp 2s forwards;">For Danis 🌸</h1>
+        <p style="animation:fadeUp 3s 1s forwards;">
+        punya cowo aslab prokom jago ngoding bingung ngasih apa jadi aku kasih html aja HEHE<br><br>
+        maaf kalo ndak seromantis orang orang yah danis<br><br>
+        tapi cowomu ini punya jalan romantis sendiri SHIET SHIET SHIET<br><br>
+        plis jangan geli jangan di yek in 💀💗
+        </p>
+    `;
+}
+
+/* FLOWER GENERATOR */
+function createFlower(){
+    const flower=document.createElement("div");
+    flower.classList.add("flower");
+
+    const colors=["#ff69b4","#ffb6c1","#ffffff","#ffd1dc"];
+    const color=colors[Math.floor(Math.random()*colors.length)];
+
+    for(let i=0;i<6;i++){
+        const petal=document.createElement("div");
+        petal.classList.add("petal");
+        petal.style.background=color;
+        petal.style.transform="translateX(-50%) rotate("+(i*60)+"deg)";
+        flower.appendChild(petal);
+    }
+
+    const stem=document.createElement("div");
+    stem.classList.add("stem");
+    flower.appendChild(stem);
+
+    flower.style.left=Math.random()*window.innerWidth+"px";
+    flower.style.animationDuration=(Math.random()*8+15)+"s";
+
+    document.body.appendChild(flower);
+
+    setTimeout(()=>{flower.remove();},20000);
+}
+setInterval(createFlower,1200);
+
+</script>
+
+</body>
+</html>
+
+
